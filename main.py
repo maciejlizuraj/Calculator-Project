@@ -5,6 +5,8 @@ import re
 
 
 class Event:
+    probability=0
+    name=""
     """
         A class representing an event.
 
@@ -60,7 +62,6 @@ def callback_tries(inp: str):
 
 class Calculator:
     events = []
-    first_generation = True
     """
     A class representing a calculator
     @param events: list of all events
@@ -112,7 +113,7 @@ class Calculator:
 
         self.probability_calculation_result_label.grid(row=4, column=3)
 
-        self.number_of_tries_var = tk.StringVar()
+        self.number_of_tries_var = tk.StringVar(value="0")
         tk.Label(self.window, text="Plots are for first event. Tries:").grid(row=4, column=0)
         e = tk.Entry(self.window, textvariable=self.number_of_tries_var)
         e.grid(row=4, column=1)
@@ -156,10 +157,9 @@ class Calculator:
         Method used to keep lists widgets with possible events up to date
         @return: None
         """
-        if not self.first_generation:
-            self.first_option_menu.grid_remove()
-            self.second_option_menu.grid_remove()
-            self.first_generation = False
+
+        self.first_option_menu.grid_remove()
+        self.second_option_menu.grid_remove()
 
         self.first_event_str = tk.StringVar(self.window)
         self.first_event = self.events[0]
