@@ -3,9 +3,9 @@ A GUI application used for calculations related to probability of independent ev
 
 # Dependencies
 requires libraries:
-math
-tkinter
-mathplotlib.pyplot
+math, 
+tkinter, 
+mathplotlib.pyplot, 
 re
 
 
