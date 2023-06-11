@@ -5,8 +5,8 @@ import re
 
 
 class Event:
-    probability=0
-    name=""
+    probability = 0
+    name = ""
     """
         A class representing an event.
 
@@ -103,7 +103,8 @@ class Calculator:
         tk.Label(self.window, text="First event").grid(row=0, column=2)
         tk.Label(self.window, text="Second event").grid(row=0, column=3)
 
-        self.probability_calculation_result_label = tk.Label(self.window, text="Result")
+        self.probability_calculation_result_label = tk.Label(self.window, text="N/A")
+        tk.Label(self.window, text="Result: ").grid(row=4,column=2)
         tk.Button(self.window, text="And", command=lambda: self.display_and_probability()).grid(row=2, column=2)
         tk.Button(self.window, text="Or", command=lambda: self.display_or_probability()).grid(row=2, column=3)
         tk.Button(self.window, text="Xor", command=lambda: self.display_xor_probability()).grid(row=3, column=2)
@@ -165,11 +166,13 @@ class Calculator:
         self.first_event = self.events[0]
         self.first_event_str.set(self.first_event)
         self.first_option_menu = tk.OptionMenu(self.window, self.first_event_str, *self.events)
+        self.first_option_menu.config(width=20)
 
         self.second_event_str = tk.StringVar(self.window)
         self.second_event = self.events[0]
         self.second_event_str.set(self.second_event)
         self.second_option_menu = tk.OptionMenu(self.window, self.second_event_str, *self.events)
+        self.second_option_menu.config(width=20)
 
         self.first_option_menu.grid(row=1, column=2)
         self.second_option_menu.grid(row=1, column=3)
@@ -242,6 +245,8 @@ class Calculator:
             y_arr.append((1 - self.first_event.probability) * y_arr[-1])
 
         plt.plot(x_arr, y_arr)
+        plt.title("Probability of not happening of " + str(self.first_event) + " with up to " + str(
+            self.number_of_tries_var.get()) + " tries")
         plt.show()
 
     def graph_probability(self) -> None:
@@ -266,6 +271,8 @@ class Calculator:
             y_arr.append(calc(i))
 
         plt.plot(x_arr, y_arr)
+        plt.title("Probability distribution of " + str(self.first_event) + " with up to " + str(
+            self.number_of_tries_var.get()) + " tries")
         plt.show()
 
     def graph_cumulative_distribution(self) -> None:
@@ -289,6 +296,8 @@ class Calculator:
             y_arr.append(calc(i) + y_arr[-1])
 
         plt.plot(x_arr, y_arr)
+        plt.title("Cumulative distribution of "+str(self.first_event)+" with up to "+str(
+            self.number_of_tries_var.get())+" tries")
         plt.show()
 
 
